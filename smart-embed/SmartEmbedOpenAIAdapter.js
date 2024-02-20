@@ -1,0 +1,106 @@
+const { SmartEmbedApiAdapter } = require("./SmartEmbedApiAdapter"); // Adjust the path as necessary
+const { getEncoding } = require("js-tiktoken"); // Adjust the path as necessary
+
+class SmartEmbedOpenAIAdapter extends SmartEmbedApiAdapter {
+  constructor(model_config_key, http_request_adapter, api_key, opts = {}) {
+    super(model_config_key, http_request_adapter, api_key, opts);
+    this.tokenizer = getEncoding("cl100k_base");
+  }
+  count_tokens(input) {
+    return this.tokenizer.encode(input).length;
+  }
+  async embed(input) {
+    if (!(input == null ? void 0 : input.length))
+      return console.log("input is empty");
+    const embedding = {};
+    embedding.total_tokens = this.count_tokens(input);
+    if (embedding.total_tokens > this.max_tokens) {
+      const truncated_input = this.tokenizer.decode(
+        this.tokenizer.encode(input).slice(0, this.max_tokens - 10)
+      );
+      console.log(`input truncated to ${this.max_tokens} tokens`);
+      input = truncated_input;
+    }
+    const response = await this.request_embedding(input);
+    embedding.vec = response.data[0].embedding;
+    embedding.tokens = response.usage.total_tokens;
+    return embedding;
+  }
+  async embed_batch(items) {
+    items = items.filter((item) => {
+      var _a;
+      return ((_a = item.embed_input) == null ? void 0 : _a.length) > 0;
+    });
+    if (items.length === 0)
+      return console.log("empty batch (or all items have empty embed_input)");
+    const embed_inputs = items.map((item) => {
+      item.total_tokens = this.count_tokens(item.embed_input);
+      if (item.total_tokens < this.max_tokens) return item.embed_input;
+      console.log("total tokens exceeds max_tokens", item.total_tokens);
+      const truncated_input =
+        this.tokenizer.decode(
+          this.tokenizer.encode(item.embed_input).slice(0, this.max_tokens - 20)
+        ) + "...";
+      return truncated_input;
+    });
+    const response = await this.request_embedding(embed_inputs);
+    if (!response) {
+      console.log(items);
+    }
+    const total_tokens = response.usage.total_tokens;
+    const total_chars = items.reduce(
+      (acc, item) => acc + item.embed_input.length,
+      0
+    );
+    return items.map((item, i) => {
+      item.vec = response.data[i].embedding;
+      item.tokens = Math.round(
+        (item.embed_input.length / total_chars) * total_tokens
+      );
+      return item;
+    });
+  }
+  async request_embedding(embed_input, retries = 0) {
+    const { url_first } = this.opts;
+    if (embed_input.length === 0) {
+      console.log("embed_input is empty");
+      return null;
+    }
+    const body = {
+      model: this.model_name,
+      input: embed_input,
+    };
+    if (this.model_name.startsWith("text-embedding-3")) {
+      body.dimensions = this.dims;
+    }
+    const request2 = {
+      url: `https://api.openai.com/v1/embeddings`,
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.api_key}`,
+      },
+    };
+    try {
+      const args = url_first ? [request2.url, request2] : [request2];
+      const resp = await this.http_request_adapter(...args);
+      const json =
+        typeof resp.json === "function" ? await resp.json() : await resp.json;
+      if (!json.data) throw resp;
+      if (!json.usage) throw resp;
+      return json;
+    } catch (error) {
+      if (error.status === 429 && retries < 3) {
+        const backoff = Math.pow(retries + 1, 2);
+        console.log(`retrying request (429) in ${backoff} seconds...`);
+        await new Promise((r) => setTimeout(r, 1e3 * backoff));
+        return await this.request_embedding(embed_input, retries + 1);
+      }
+      console.log(error);
+      return null;
+    }
+  }
+}
+
+module.exports = { SmartEmbedOpenAIAdapter };

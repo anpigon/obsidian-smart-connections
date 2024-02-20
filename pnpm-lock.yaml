@@ -1,9 +1,15 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  base64-js:
+    specifier: ^1.5.1
+    version: 1.5.1
   ejs:
     specifier: ^3.1.9
     version: 3.1.9
+  js-tiktoken:
+    specifier: ^1.0.10
+    version: 1.0.10
   smart-chunks:
     specifier: latest
     version: 0.1.11

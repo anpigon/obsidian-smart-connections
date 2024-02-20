@@ -38,7 +38,9 @@
     "obsidian": "latest"
   },
   "dependencies": {
+    "base64-js": "^1.5.1",
     "ejs": "^3.1.9",
+    "js-tiktoken": "^1.0.10",
     "smart-chunks": "latest",
     "smart-collections": "latest",
     "smart-embed": "latest"

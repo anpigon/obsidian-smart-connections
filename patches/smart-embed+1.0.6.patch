@@ -1,9 +1,11 @@
 diff --git a/node_modules/smart-embed/models.json b/node_modules/smart-embed/models.json
-index e3d40b8..b39242c 100644
+index e3d40b8..986f2b4 100644
 --- a/node_modules/smart-embed/models.json
 +++ b/node_modules/smart-embed/models.json
-@@ -1,4 +1,13 @@
- {
+@@ -44,6 +44,15 @@
+     "description": "Local, 8,192 tokens, 512 dim",
+     "type": "huggingface-transformers"
+   },
 +  "jhgan/ko-sroberta-multitask": {
 +    "model_name": "jhgan/ko-sroberta-multitask",
 +    "batch_size": 1,
@@ -13,6 +15,6 @@ index e3d40b8..b39242c 100644
 +    "description": "Local, 514 tokens, 768 dim",
 +    "type": "huggingface-transformers"
 +  },
-   "TaylorAI/bge-micro-v2": {
-     "model_name": "TaylorAI/bge-micro-v2",
-     "batch_size": 1,
+   "text-embedding-3-small": {
+     "model_name": "text-embedding-3-small",
+     "batch_size": 50,

@@ -6,7 +6,8 @@
     "build": "node build/esbuild.js",
     "compile": "node build/compile_ejs.js",
     "release": "node build/release.js",
-    "test": "npx ava --verbose test"
+    "test": "npx ava --verbose test",
+    "postinstall": "patch-package"
   },
   "repository": {
     "type": "git",
@@ -35,7 +36,9 @@
     "child_process": "^1.0.2",
     "dotenv": "^16.3.1",
     "esbuild": "^0.17.19",
-    "obsidian": "latest"
+    "obsidian": "latest",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0"
   },
   "dependencies": {
     "base64-js": "^1.5.1",

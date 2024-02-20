@@ -1,0 +1,18 @@
+diff --git a/node_modules/smart-embed/models.json b/node_modules/smart-embed/models.json
+index e3d40b8..b39242c 100644
+--- a/node_modules/smart-embed/models.json
++++ b/node_modules/smart-embed/models.json
+@@ -1,4 +1,13 @@
+ {
++  "jhgan/ko-sroberta-multitask": {
++    "model_name": "jhgan/ko-sroberta-multitask",
++    "batch_size": 1,
++    "dims": 768,
++    "max_tokens": 514,
++    "name": "Ko-SRoBERTa",
++    "description": "Local, 514 tokens, 768 dim",
++    "type": "huggingface-transformers"
++  },
+   "TaylorAI/bge-micro-v2": {
+     "model_name": "TaylorAI/bge-micro-v2",
+     "batch_size": 1,

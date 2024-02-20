@@ -46,6 +46,6 @@
     "js-tiktoken": "^1.0.10",
     "smart-chunks": "latest",
     "smart-collections": "latest",
-    "smart-embed": "latest"
+    "smart-embed": "^1.0.6"
   }
 }

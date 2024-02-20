@@ -1,4 +1,4 @@
-const { SmartEmbed } = require("./SmartEmbed"); // Adjust the path as necessary
+const { SmartEmbed } = require("smart-embed/SmartEmbed"); // Adjust the path as necessary
 
 class SmartEmbedTransformersNodeAdapter extends SmartEmbed {
   async init() {

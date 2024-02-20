@@ -13,7 +13,5 @@ package-lock.json
 sc-desktop
 sc-v1
 smart-chunks
-smart-collections
-smart-embed
 smart-plugins
 vec_lite

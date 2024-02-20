@@ -1,4 +1,5 @@
 const { CollectionItem } = require("./CollectionItem"); // Adjust the path as necessary
+const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 
 class Collection {
   constructor(brain) {
@@ -169,7 +170,7 @@ class Collection {
       .replace(/([a-z])([A-Z])/g, "$1_$2")
       .toLowerCase();
   }
-  
+
   get item_type() {
     return this.brain.item_types[this.item_class_name];
   }

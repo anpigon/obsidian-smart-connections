@@ -11,28 +11,24 @@ class SmartEmbed {
     return adapter;
   }
   async init() {
-    // Initialization logic
   }
   /**
    * @param {string} input
    * @returns {Promise<number>}
    */
   async count_tokens(input) {
-    // Count tokens logic
   }
   /**
    * @param {string} input
    * @returns {Promise<number[]>}
    */
   async embed(input) {
-    // Embed logic
   }
   /**
    * @param {string[]} input
    * @returns {Promise<number[][]>}
    */
   async embed_batch(input) {
-    // Embed batch logic
   }
   get batch_size() {
     return this.config.batch_size;

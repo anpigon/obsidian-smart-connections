@@ -1,13 +1,4 @@
 {
-  "jhgan/ko-sroberta-multitask": {
-    "model_name": "jhgan/ko-sroberta-multitask",
-    "batch_size": 1,
-    "dims": 768,
-    "max_tokens": 514,
-    "name": "Ko-SRoBERTa",
-    "description": "Local, 514 tokens, 768 dim",
-    "type": "huggingface-transformers"
-  },
   "TaylorAI/bge-micro-v2": {
     "model_name": "TaylorAI/bge-micro-v2",
     "batch_size": 1,
@@ -51,6 +42,15 @@
     "max_tokens": 8192,
     "name": "Jina-v2-small-8K",
     "description": "Local, 8,192 tokens, 512 dim",
+    "type": "huggingface-transformers"
+  },
+  "anpigon/ko-sroberta-multitask": {
+    "model_name": "anpigon/ko-sroberta-multitask",
+    "batch_size": 1,
+    "dims": 768,
+    "max_tokens": 514,
+    "name": "Ko-SRoBERTa",
+    "description": "Local, 514 tokens, 768 dim",
     "type": "huggingface-transformers"
   },
   "text-embedding-3-small": {

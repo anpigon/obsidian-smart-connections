@@ -1,4 +1,4 @@
-const models = require('./models.json'); // Adjust the path as necessary
+const models = require('smart-embed/models.json'); // Adjust the path as necessary
 
 class SmartEmbed {
   constructor(model_config_key) {

@@ -3,7 +3,8 @@
   "version": "2.0.115",
   "description": "Link and chat with your notes using ChatGPT and embedding artificial intelligence from OpenAI.",
   "scripts": {
-    "build": "node build/esbuild.js",
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
     "compile": "node build/compile_ejs.js",
     "release": "node build/release.js",
     "test": "npx ava --verbose test",
@@ -38,7 +39,13 @@
     "esbuild": "^0.17.19",
     "obsidian": "latest",
     "patch-package": "^8.0.0",
-    "postinstall-postinstall": "^2.1.0"
+    "postinstall-postinstall": "^2.1.0",
+    "@types/node": "^16.11.6",
+		"@typescript-eslint/eslint-plugin": "5.29.0",
+		"@typescript-eslint/parser": "5.29.0",
+		"builtin-modules": "3.3.0",
+		"tslib": "2.4.0",
+		"typescript": "4.7.4"
   },
   "dependencies": {
     "base64-js": "^1.5.1",

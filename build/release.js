@@ -59,6 +59,11 @@ rl_interface.question(`Confirm release version (${version}): `, (confirmed_versi
       const release_info = release_response.data;
       console.log('Release created:', release_info);
 
+      // copy the main.js file to dist folder
+      fs.copyFileSync('main.js', 'dist/main.js');
+      fs.copyFileSync('manifest.json', 'dist/manifest.json');
+      fs.copyFileSync('styles.css', 'dist/styles.css');
+
       const uploadAsset = async (assetPath, assetName) => {
         const uploadUrl = `${release_info.upload_url.split('{')[0]}?name=${encodeURIComponent(assetName)}`;
         console.log(`Uploading ${assetName} to ${uploadUrl}`); // Debug log
